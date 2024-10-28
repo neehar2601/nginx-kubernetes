@@ -24,8 +24,8 @@ spec:
         thresholdRange:
           max: 500
         interval: 30s
-    webhooks:
-      - name: load-test
-        type: rollout
-        url: http://flagger-loadtester.test/
-        timeout: 5s
+  webhooks:
+    - name: load-test
+      type: rollout
+      url: http://flagger-loadtester.test.svc.cluster.local/
+      timeout: 5s
