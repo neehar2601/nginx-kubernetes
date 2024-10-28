@@ -14,7 +14,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: resume
+        image: neehar2601/resume:v2
         ports:
         - containerPort: 80
