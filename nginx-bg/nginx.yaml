@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: resume
-        image: neehar2601/resume:v3
+        image: neehar2601/resume:v1
         ports:
         - containerPort: 80
