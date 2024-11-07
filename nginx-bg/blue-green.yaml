@@ -1,0 +1,36 @@
+apiVersion: flagger.app/v1beta1
+kind: BlueGreen
+metadata:
+  name: nginx
+  namespace: test
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  service:
+    port: 80
+    portDiscovery: true
+  analysis:
+    interval: 1m
+    threshold: 10
+    iterations: 5
+    metrics:
+      - name: request-success-rate
+        thresholdRange:
+          min: 99
+        interval: 30s
+      - name: request-duration
+        thresholdRange:
+          max: 500
+        interval: 30s
+    webhooks:
+      - name: load-test
+        type: rollout
+        url: http://flagger-loadtester.test/
+        timeout: 5s
+  blueGreen:
+    activeService: nginx-active
+    previewService: nginx-preview
+    scaleDownDelaySeconds: 30
+    scaleUpDelaySeconds: 30
